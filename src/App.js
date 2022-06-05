@@ -14,7 +14,6 @@ function App() {
     compare: false, // to know if 1st or 2nd click
     firstElement: '',
     firstElementIndex: '',
-    show: false,
   })
 
   function handleClick(){
@@ -30,44 +29,61 @@ function App() {
         shuffledItems: allItems,
         numTurns: 0,
         compare: false,
-        firstElement: '',
-        firstElementIndex: '',
+        lastElement: '',
+        lastElementIndex: '',
       }
     })
   }
 
   function addTurn(passedValue,passedNum){
-    console.log(passedValue,passedNum)
+    console.log('Clicked:',passedValue,passedNum)
     setMemoryItems(prevState => {
       if(prevState.compare){ //starts to compare to second element
-        if(prevState.firstElement === passedValue && prevState.firstElementIndex !== passedNum){ // if matched
+        if(prevState.lastElement === passedValue && prevState.lastElementIndex !== passedNum){ // if matched
           console.log('matched')
-          prevState.shuffledItems[prevState.firstElementIndex] = prevState.firstElement+"matched"
-          prevState.shuffledItems[passedNum] = passedValue+"matched"
+          prevState.shuffledItems[prevState.lastElementIndex] = prevState.lastElement+"|matched"
+          prevState.shuffledItems[passedNum] = passedValue+"|matched"
           return {
             ...prevState,
             numTurns: prevState.numTurns+=1,
             compare: false, 
-            firstElement: passedValue,
+            lastElement: passedValue,
           }
         }else{ // not matched
+          prevState.shuffledItems[passedNum] = passedValue+"|show" // changing current index
+          prevState.shuffledItems[prevState.lastElementIndex] = prevState.lastElement.replace("|show",'') // changing past index past index
           return {
             ...prevState,
             numTurns: prevState.numTurns+=1,
             compare: false, 
-            firstElement: '',
-            firstElementIndex: ''
+            lastElement: passedValue,
+            lastElementIndex: passedNum,
           }
         }
       }else{
+        prevState.shuffledItems[passedNum] = passedValue+"|show" // changing current index
+        if(!/matched/.test(prevState.shuffledItems[prevState.lastElementIndex])){
+          prevState.shuffledItems[prevState.lastElementIndex] = prevState.lastElement.replace("|show",'') // changing past index past index
+        }
         return {
           ...prevState,
           compare: true, //starts to compare to second element
-          firstElement: passedValue,
-          firstElementIndex: passedNum,
+          lastElement: passedValue,
+          lastElementIndex: passedNum,
         }
       }
     })
+  }
+
+  let countMatched = 0
+  for(let i=0; i<memoryItems.shuffledItems.length; i++){
+    if(/matched/.test(memoryItems.shuffledItems[i])){
+      countMatched++
+    }
+    
+  }
+  if(countMatched === memoryItems.shuffledItems.length){
+    alert('Completed!')
   }
 
   return (

@@ -1,30 +1,30 @@
 import React from 'react'
 
-let showCounter = 0
 export default function Blocks(props){
     let checker = /matched/.test(props.blockName)
-    let newBlockName = props.blockName.substring(0,props.blockName.indexOf('matched'))
+    let showItem = /show/.test(props.blockName)
+    let newBlockName = props.blockName.substring(0,props.blockName.indexOf('|'))
 
-    const [showItem, setShowItem] = React.useState(false)
-    
-    function show(){
-        showCounter++
-        if(showCounter<3){
-            setShowItem(prevState => !prevState)
-        }else{
-            showCounter=0
-            console.log('reset show')
-            setShowItem(false)
-        }
-        console.log('showCounter', showCounter)
+    // console.log('showItem',showItem, props.blockName)
+
+    let displayAnswer = ''
+
+    if(checker || showItem){
+        displayAnswer = newBlockName
+    }else{
+        displayAnswer = newBlockName
     }
+   
+
     return(
         <div 
-            className={`blocks blocks-alignment aspect-square ${checker ? 'bg-yellow-400' : 'bg-indigo-400'}`}
-            onClick={() => {props.blockClicked(); show();}}
+            className={`blocks blocks-alignment aspect-square ${checker ? 'bg-yellow-400 ' : 'bg-indigo-400'}`}
+            // onClick={() => {props.blockClicked(); show();}}
+            onClick={props.blockClicked}
             name={props.blockName}
+            disabled={checker}
         >
-            {showItem ? checker ? newBlockName : props.blockName : ''}
+            {displayAnswer}
         </div>
        
     )
