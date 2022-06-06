@@ -82,7 +82,7 @@ function App() {
     }
     
   }
-  if(countMatched === memoryItems.shuffledItems.length){
+  if(countMatched > 0 &&countMatched === memoryItems.shuffledItems.length){
     alert('Completed!')
   }
 
