@@ -92,7 +92,6 @@ function App() {
       }
     })
   }
-  console.log(memoryItems)
 
   // To know if completed
   let countMatched = 0
