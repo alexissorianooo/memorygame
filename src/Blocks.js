@@ -1,4 +1,6 @@
 import React from 'react'
+
+//images
 import apple from './images/apple.png'
 import banana from './images/banana.png'
 import mango from './images/mango.png'
@@ -11,18 +13,14 @@ import watermelon from './images/watermelon.png'
 
 export default function Blocks(props){
     let checker = /matched/.test(props.blockName)
-    // let showItem = /show/.test(props.blockName)
-    let newBlockName = props.blockName.substring(0,props.blockName.indexOf('|'))
+    
+    let newBlockName = props.blockName.substring(0,props.blockName.indexOf('|')) 
+    // newBlockName will be empty string if there are not indexOf('|') found on props.blockName
+    /// hence, hiding the image when '|show' or '|matched' not found on the props.blockName
 
-    // console.log('showItem',showItem, props.blockName)
+    console.log(newBlockName)
 
-    // let displayAnswer = ''
-
-    // if(checker || showItem){
-    //     displayAnswer = newBlockName
-    // }else{
-    //     displayAnswer = newBlockName
-    // }
+   
    
     let imgSrc = ''
     switch(newBlockName){
@@ -59,7 +57,6 @@ export default function Blocks(props){
         <div 
             className={`blocks blocks-alignment aspect-square ${checker ? 'bg-yellow-400 ' : 'bg-indigo-400'}`}
             onClick={props.blockClicked}
-            name={props.blockName}
             disabled={checker}
         >
             <img src={imgSrc} alt={newBlockName}/>

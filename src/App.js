@@ -36,7 +36,7 @@ function App() {
   }
 
   function addTurn(passedValue,passedNum){
-    console.log('Clicked:',passedValue,passedNum)
+    // console.log('Clicked:',passedValue,passedNum)
     setMemoryItems(prevState => {
       if(prevState.compare){ //starts to compare to second element
         if(prevState.lastElement === passedValue && prevState.lastElementIndex !== passedNum){ // if matched
@@ -108,7 +108,8 @@ function App() {
               return (
                 <Blocks 
                   blockName={item} 
-                  key={num} blockClicked={() => addTurn(item,num)}
+                  key={num} 
+                  blockClicked={() => addTurn(item,num)}
                 />
               )
             })
