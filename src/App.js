@@ -75,6 +75,7 @@ function App() {
     })
   }
 
+  // To know if completed
   let countMatched = 0
   for(let i=0; i<memoryItems.shuffledItems.length; i++){
     if(/matched/.test(memoryItems.shuffledItems[i])){
@@ -90,12 +91,13 @@ function App() {
     <div className="bg-gray-300 h-screen w-screen">
       <Navbar/>
       <div className='grid grid-cols-2'>
-        <button onClick={handleClick} className="p-3 m-4 border-2 border-gray-900 rounded-xl">{memoryItems.shuffledItems ? 'Reshuffle' : 'Start'}</button>
-        <div className='p-3 m-4 border-2 border-gray-900 rounded-xl'>
-          <p>
+        <button onClick={handleClick} className="p-3 m-4 border-2 border-gray-900 rounded-xl md:w-3/5 md:place-self-end md:p-6 txt">
+          {memoryItems.shuffledItems ? 'Reshuffle' : 'Start'}
+        </button>
+        <div className='p-3 m-4 border-2 border-gray-900 rounded-xl md:w-3/5 md:place-self-start md:p-6 txt'>
+          <p className='text-center'>
             Turns: <span>{memoryItems.numTurns}</span>
           </p>
-          
         </div>
       </div>
       

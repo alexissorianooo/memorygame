@@ -9,4 +9,7 @@
   .blocks-alignment{
     @apply flex justify-center
   }
+  .txt{
+    @apply text-lg md:text-2xl
+  }
 }
