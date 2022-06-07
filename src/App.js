@@ -2,6 +2,7 @@ import Navbar from './Navbar'
 import Blocks from './Blocks'
 import React from 'react'
 import Developer from './Developer'
+import Modal from './Modal'
 
 
 function App() {
@@ -15,7 +16,10 @@ function App() {
     compare: false, // to know if 1st or 2nd click
     firstElement: '',
     firstElementIndex: '',
+    modalOn: false,
+    modalDisplayed: false,
   })
+
 
   function handleClick(){
     for(let i=allItems.length-1; i>0; i--){ 
@@ -32,6 +36,8 @@ function App() {
         compare: false,
         lastElement: '',
         lastElementIndex: '',
+        modalOn: false,
+        modalDisplayed: false,
       }
     })
   }
@@ -75,17 +81,38 @@ function App() {
     })
   }
 
+  function closeModal(){
+    console.log("used")
+    setMemoryItems(prevState => {
+      if(prevState.modalOn && prevState.modalDisplayed){
+        return{
+          ...prevState,
+          modalOn: false,
+        }
+      }
+    })
+  }
+  console.log(memoryItems)
+
   // To know if completed
   let countMatched = 0
   for(let i=0; i<memoryItems.shuffledItems.length; i++){
     if(/matched/.test(memoryItems.shuffledItems[i])){
       countMatched++
     }
-    
   }
-  if(countMatched > 0 &&countMatched === memoryItems.shuffledItems.length){
-    alert('Completed!')
+  
+  //to display modal
+  if(countMatched > 0 && countMatched === memoryItems.shuffledItems.length && !memoryItems.modalDisplayed){
+    setMemoryItems(prevState => {
+      return{
+        ...prevState,
+        modalOn: true,
+        modalDisplayed: true
+      }
+    })
   }
+
 
   return (
     <div className="bg-gray-300 h-screen w-screen">
@@ -115,6 +142,7 @@ function App() {
             })
         }
       </div>
+      {memoryItems.modalOn && <Modal turns={memoryItems.numTurns} tryAgain={handleClick} closeButton={closeModal}/>}
       <Developer />
     </div>
   );
