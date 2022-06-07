@@ -13,15 +13,10 @@ import watermelon from './images/watermelon.png'
 
 export default function Blocks(props){
     let checker = /matched/.test(props.blockName)
-    
     let newBlockName = props.blockName.substring(0,props.blockName.indexOf('|')) 
     // newBlockName will be empty string if there are not indexOf('|') found on props.blockName
     /// hence, hiding the image when '|show' or '|matched' not found on the props.blockName
 
-    console.log(newBlockName)
-
-   
-   
     let imgSrc = ''
     switch(newBlockName){
         case 'apple':

@@ -1,6 +1,7 @@
 import Navbar from './Navbar'
 import Blocks from './Blocks'
 import React from 'react'
+import Developer from './Developer'
 
 
 function App() {
@@ -36,7 +37,6 @@ function App() {
   }
 
   function addTurn(passedValue,passedNum){
-    // console.log('Clicked:',passedValue,passedNum)
     setMemoryItems(prevState => {
       if(prevState.compare){ //starts to compare to second element
         if(prevState.lastElement === passedValue && prevState.lastElementIndex !== passedNum){ // if matched
@@ -115,6 +115,7 @@ function App() {
             })
         }
       </div>
+      <Developer />
     </div>
   );
 }
