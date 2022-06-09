@@ -1,5 +1,6 @@
 # Memory Game
 
+View live:
 https://fruity-memory-game.netlify.app
 
 A simple game made with: <br />
