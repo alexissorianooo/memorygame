@@ -1,5 +1,7 @@
 # Memory Game
 
+https://fruity-memory-game.netlify.app
+
 A simple game made with: <br />
 **React** for building <br />
 **Tailwind CSS** for designing <br />
