@@ -1,6 +1,6 @@
 # Memory Game
 
-View live:
+View live: <br />
 https://fruity-memory-game.netlify.app
 
 A simple game made with: <br />
