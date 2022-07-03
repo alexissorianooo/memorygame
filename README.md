@@ -17,5 +17,3 @@ Developer notes: <br />
 -I used bg-opacity instead of opacity classname for the modal <br />
 &nbsp;&nbsp;&nbsp;&nbsp;*bg-opacity controls the opacity of the element's background <br />
 &nbsp;&nbsp;&nbsp;&nbsp;*opactiy controls the opacity of the element <br />
-
-ye
