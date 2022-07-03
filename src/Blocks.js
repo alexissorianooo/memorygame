@@ -18,7 +18,8 @@ export default function Blocks(props){
     /// hence, hiding the image when '|show' or '|matched' not found on the props.blockName
 
     let imgSrc = ''
-    switch(newBlockName){
+    let display = /show|matched/.test(props.blockName) ? 'block' : 'hidden' 
+    switch(/\|/.test(props.blockName) ? props.blockName.substring(0,props.blockName.indexOf('|')) : props.blockName){
         case 'apple':
             imgSrc = apple
             break;
@@ -54,7 +55,7 @@ export default function Blocks(props){
             onClick={props.blockClicked}
             disabled={checker}
         >
-            <img src={imgSrc} alt={newBlockName}/>
+            <img src={imgSrc} alt={newBlockName} className={display}/>
         </div>
        
     )
