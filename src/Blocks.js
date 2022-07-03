@@ -52,11 +52,10 @@ export default function Blocks(props){
     return(
         <div 
             className={`blocks blocks-alignment aspect-square ${checker ? 'bg-yellow-400 ' : 'bg-indigo-400 hover:bg-green-300'}`}
-            onClick={props.blockClicked}
+            onClick={checker ? undefined : props.blockClicked}
             disabled={checker}
         >
             <img src={imgSrc} alt={newBlockName} className={display}/>
-        </div>
-       
+        </div> 
     )
 }

@@ -56,20 +56,34 @@ function App() {
             lastElement: passedValue,
           }
         }else{ // not matched
-          prevState.shuffledItems[passedNum] = passedValue+"|show" // changing current index
-          prevState.shuffledItems[prevState.lastElementIndex] = prevState.lastElement.replace("|show",'') // changing past index past index
-          return {
-            ...prevState,
-            numTurns: prevState.numTurns+=1,
-            compare: false, 
-            lastElement: passedValue,
-            lastElementIndex: passedNum,
+          if(prevState.lastElementIndex === passedNum){ // if clicked again the same block, do not hide image
+            prevState.shuffledItems[passedNum] = passedValue // stay showing
+            return {
+              ...prevState, 
+              // compare: false, // (commented) so that we will not compare if clicked the same block
+              lastElement: passedValue,
+              lastElementIndex: passedNum,
+            }
+          }else{
+            prevState.shuffledItems[passedNum] = passedValue+"|show" // changing current index
+            prevState.shuffledItems[prevState.lastElementIndex] = prevState.lastElement.replace("|show",'') // changing past index past index
+            return {
+              ...prevState,
+              numTurns: prevState.numTurns+=1,
+              compare: false, 
+              lastElement: passedValue,
+              lastElementIndex: passedNum,
+            }
           }
         }
       }else{
         prevState.shuffledItems[passedNum] = passedValue+"|show" // changing current index
         if(!/matched/.test(prevState.shuffledItems[prevState.lastElementIndex])){
-          prevState.shuffledItems[prevState.lastElementIndex] = prevState.lastElement.replace("|show",'') // changing past index past index
+          if(prevState.lastElementIndex === passedNum){ // if clicked again the same block, do not hide the image
+            prevState.shuffledItems[passedNum] = passedValue // stay showing
+          }else{
+            prevState.shuffledItems[prevState.lastElementIndex] = prevState.lastElement.replace("|show",'') // changing past index past index
+          }
         }
         return {
           ...prevState,
